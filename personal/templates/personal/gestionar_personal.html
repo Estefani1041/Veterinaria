@@ -1,0 +1,63 @@
+{% extends "base_header.html" %}
+{% load static %}
+
+{% block title %}
+<title> gestionar empleados </title>
+{% endblock %}
+
+{% block extra_styles %}
+<link rel="stylesheet" href="{% static 'css/tablas.css' %}">
+<link rel="stylesheet" href="{% static 'css/base_header.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="ingresar">
+        <a href="{% url 'registrar_personal' %}" class="agregar-btn">+</a>
+        <span class="agregar-texto">Agregar</span>
+    </div>
+    
+    <form method="post" action="{% url 'eliminar_personal' %}">
+        {% csrf_token %}
+<div class="acciones">
+        <div class="boton">
+            <button type="submit" name="accion" title="Eliminar">
+                <i class="fas fa-trash"></i>
+            </button>
+            <span>Eliminar</span>
+        </div>
+
+        <div class="boton">
+            <button type="submit" name="accion" title="Actualizar">
+                <i class="fas fa-trash"></i>
+            </button>
+            <span>Actualizar</span>
+        </div>
+</div>
+
+        
+
+        <table class="tabla-usuarios">
+            <tr>
+                <th class="primero"></th>
+                <th>Documento personal</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+            </tr>
+
+            {% for item in personal %}
+            <tr>
+                <td class="primero"> 
+                    <input  type="checkbox" name="ids" id="admin{{ item.id }}"
+                        value="{{ item.id }}" >
+                </td>
+                <td><label for="admin{{ item.id }}">{{ item.id }}</label></td>
+                <td><label for="admin{{ item.id }}">{{ item.nombre }}</label></td>
+                <td><label for="admin{{ item.id }}">{{ item.apellido }}</label></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+
+{% endblock %}

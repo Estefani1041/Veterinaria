@@ -1,0 +1,70 @@
+{% extends "base_header.html" %}
+{% load static %}
+
+{% block title %}
+<title>Gestionar usuarios</title>
+{% endblock %}
+
+{% block extra_styles %}
+<link rel="stylesheet" href="{% static 'css/tablas.css' %}">
+<link rel="stylesheet" href="{% static 'css/base_header.css' %}">
+
+{% endblock %}
+
+{% block content %}
+<div class="ingresar">
+    <a href="{% url 'registrar_usuario' %}" class="agregar-btn">+</a>
+    <span class="agregar-texto">Agregar</span>
+</div>
+
+<form method="post" action="{% url 'eliminar_usuario' %}">
+    {% csrf_token %}
+    
+    <div class="acciones">
+        <div class="boton">
+            <button type="submit" name="accion" value="eliminar" title="Eliminar">
+                <i class="fas fa-trash"></i>
+            </button>
+            <span>Eliminar</span>
+        </div>
+
+        <div class="boton">
+            <button type="submit" name="accion" value="actualizar" title="Actualizar">
+                <i class="fas fa-edit"></i>
+            </button>
+            <span>Actualizar</span>
+        </div>
+    </div>
+
+    <table class="tabla-usuarios">
+        <thead>
+            <tr>
+                <th class="primero"></th>
+                <th>Documento</th>
+                <th>Usuario</th>
+                <th>Tipo</th>
+                <th>Personal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+            <tr>
+                <td class="primero">
+                    <input type="checkbox" name="ids" id="usuario{{ usuario.id }}" value="{{ usuario.id }}">
+                </td>
+                <td><label for="usuario{{ usuario.id }}">{{ usuario.documento }}</label></td>
+                <td><label for="usuario{{ usuario.id }}">{{ usuario.usuario }}</label></td>
+                <td><label for="usuario{{ usuario.id }}">{{ usuario.id_tipo.cargo }}</label></td>
+                <td>
+                    {% if usuario.id_personal %}
+                        <label for="usuario{{ usuario.id }}">{{ usuario.id_personal.nombre }} {{ usuario.id_personal.apellido }}</label>
+                    {% else %}
+                        <label for="usuario{{ usuario.id }}">--</label>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</form>
+{% endblock %}

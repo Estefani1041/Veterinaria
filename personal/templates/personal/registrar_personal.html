@@ -1,0 +1,49 @@
+{% extends "base_header.html" %}
+{% load static %}
+
+{% block title %}
+<title> gestionar empleados </title>
+{% endblock %}
+
+{% block extra_styles %}
+<link rel="stylesheet" href="{% static 'css/tablas.css' %}">
+<link rel="stylesheet" href="{% static 'css/base_header.css' %}">
+
+
+{% endblock %}
+
+{% block content %}
+    <div class="cerrar-login">
+        <a href="{% url 'gestionar_personal' %}" title="Cancelar e ir atrás">✖</a>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="id">ID Personal:</label>
+        <input type="number" id="id" name="id" required>
+
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" name="apellido" required>
+
+        {% if form.errors %}
+            <div class="errores">
+                <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ field.label }}: {{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <button type="submit">Registrar</button>
+
+    </form>
+{% endblock %}

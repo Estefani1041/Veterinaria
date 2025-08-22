@@ -1,0 +1,34 @@
+{% extends "base_header.html" %}
+{% load static %}
+
+{% block title %}
+<title> home garra </title>
+{% endblock %}
+
+{% block extra_styles %}
+<link rel="stylesheet" href="{% static 'core/css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section>
+        <h2><b>Contenido</b></h2>
+        <div>
+            <img src="" alt="Imagen de contenido">
+        </div>
+    </section>
+
+    <section>
+        <h3>Misión</h3>
+        <p>
+            Nuestra Misión es ayudar a las mascotas a que se sientan felices.
+        </p>
+    </section>
+
+    <section>
+        <h3>Visión</h3>
+        <p>
+            Nuestra vision es tener muchos mas establecimientos donde puedan atender a nuestras mascotas 
+        </p>
+    </section>
+
+{% endblock %}

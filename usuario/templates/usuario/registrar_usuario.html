@@ -1,0 +1,51 @@
+{% extends "base_header.html" %}
+{% load static %}
+
+{% block title %}
+<title>Registrar usuario</title>
+{% endblock %}
+
+{% block extra_styles %}
+<link rel="stylesheet" href="{% static 'statics/css/tablas.css' %}">
+<link rel="stylesheet" href="{% static 'css/base_header.css' %}">
+
+{% endblock %}
+
+{% block content %}
+<div class="cerrar-login">
+    <a href="{% url 'gestionar_usuario' %}" title="Cancelar e ir atrás">✖</a>
+</div>
+
+<form method="post">
+    {% csrf_token %}
+
+    <label for="usuario">Usuario:</label>
+    <input type="text" id="usuario" name="usuario" value="{{ form.usuario.value|default:'' }}" required>
+
+    <label for="password">Contraseña:</label>
+    <input type="password" id="password" name="password" required>
+
+    <label for="id_tipo">Tipo:</label>
+    {{ form.id_tipo }}
+
+    <label for="id_personal">Personal asociado:</label>
+    {{ form.id_personal }}
+
+    {% if form.errors %}
+    <div class="errores">
+        <ul>
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <li>{{ field.label }}: {{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <button type="submit">Registrar</button>
+</form>
+{% endblock %}

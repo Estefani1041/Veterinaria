@@ -1,0 +1,44 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}{% endblock %}
+    {% block extra_styles %}{% endblock %}
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <header>
+        <button>
+            <img src="" alt="Logo de la tienda" class="logo">
+        </button>
+        <h1>Tienda de productos para mascotas: <strong>"Garras"</strong></h1>
+
+        <nav id="menu" class="hidden">
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Cargos</a></li>
+                <li><a href="{% url 'gestionar_personal' %}">Personas</a></li>
+                <li><a href="{% url 'gestionar_usuario' %}">Usuarios</a></li>
+                <li><a href="#">Administradores</a></li>
+                <li><a href="{% url 'cerrar' %}">Cerrar sesión</a></li>
+            </ul>
+        </nav>
+
+    </header>
+
+        <main class="main">
+            {% block content %}
+            {% endblock %}
+        </main>
+
+        <footer>
+            <p>Contáctanos</p>
+            <img src="#" alt="logo">
+        </footer>
+</body>
+</html>
